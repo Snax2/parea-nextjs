@@ -1,6 +1,43 @@
+'use client'
+
 import Image from 'next/image'
+import { useState } from 'react'
 
 export default function Home() {
+  const [email, setEmail] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      if (response.ok) {
+        setSubmitted(true)
+        setEmail('')
+        // Track with Google Analytics if available
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'signup', {
+            event_category: 'engagement',
+            event_label: 'waitlist'
+          })
+        }
+      }
+    } catch (error) {
+      console.error('Signup error:', error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
   return (
     <div className="min-h-screen">
       {/* Header */}
@@ -234,22 +271,34 @@ export default function Home() {
           </p>
 
           <div className="max-w-md mx-auto">
-            <form className="space-y-4">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="flex-1 px-6 py-4 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/30 text-lg"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="bg-white text-amber-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all duration-200"
-                >
-                  Join Waitlist
-                </button>
+            {submitted ? (
+              <div className="text-center py-8 animate-fade-in">
+                <div className="text-6xl mb-4">🎉</div>
+                <h3 className="text-2xl font-bold mb-2">Welcome to Parea!</h3>
+                <p className="opacity-90">You&apos;re on the list! We&apos;ll notify you when the app launches.</p>
               </div>
-            </form>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email address"
+                    className="flex-1 px-6 py-4 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/30 text-lg transition-all duration-200"
+                    required
+                    disabled={isSubmitting}
+                  />
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="bg-white text-amber-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
+                  >
+                    {isSubmitting ? 'Joining...' : 'Join Waitlist'}
+                  </button>
+                </div>
+              </form>
+            )}
             <p className="text-sm opacity-75 mt-4">
               Get early access when Parea launches on iOS. No spam, just updates.
             </p>
