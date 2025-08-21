@@ -41,31 +41,31 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-200 z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center">
+      <header className="nav">
+        <div className="nav-container">
+          <div className="nav-brand">
             <Image
               src="/parea-logo.png"
               alt="Parea"
               width={280}
               height={80}
-              className="h-20 w-auto"
+              className="nav-logo"
               priority
             />
           </div>
-          <nav className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-gray-700 hover:text-amber-600 font-medium transition-colors">
+          <nav className="nav-links">
+            <a href="#features" className="nav-link">
               Features
             </a>
-            <a href="#privacy" className="text-gray-700 hover:text-amber-600 font-medium transition-colors">
+            <a href="#privacy" className="nav-link">
               Privacy
             </a>
-            <a href="#waitlist" className="bg-gradient-to-r from-amber-500 to-yellow-500 text-white px-6 py-3 rounded-xl font-semibold hover:from-amber-600 hover:to-yellow-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+            <a href="#waitlist" className="btn-primary">
               Get Early Access
             </a>
           </nav>
           <div className="md:hidden">
-            <a href="#waitlist" className="bg-gradient-to-r from-amber-500 to-yellow-500 text-white px-4 py-2 rounded-lg font-medium text-sm">
+            <a href="#waitlist" className="btn-primary text-sm px-4 py-2">
               Get Access
             </a>
           </div>
@@ -73,26 +73,22 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 bg-gradient-to-br from-amber-50 via-white to-orange-50 relative overflow-hidden">
+      <section className="hero">
         {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
-        </div>
+        <div className="hero-pattern" />
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="hero-content">
+          <div className="hero-grid">
             {/* Hero Text */}
-            <div className="text-center lg:text-left">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent font-serif">
+            <div className="hero-text">
+              <h1 className="hero-title">
                 Transform Social Media into Real Connections
               </h1>
-              <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
+              <p className="hero-subtitle">
                 Break free from endless scrolling. Every time you reach for social media, Parea gently guides you toward meaningful relationships instead.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 items-center lg:items-start mb-6">
-                <a href="#waitlist" className="bg-gradient-to-r from-amber-500 to-yellow-500 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:from-amber-600 hover:to-yellow-600 transition-all duration-200 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+                <a href="#waitlist" className="btn-primary text-lg px-8 py-4">
                   Join the Waitlist
                 </a>
               </div>
@@ -102,10 +98,10 @@ export default function Home() {
             </div>
 
             {/* Phone Mockup */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative">
-                <div className="w-80 h-[640px] bg-gray-900 rounded-[3rem] p-3 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                  <div className="w-full h-full bg-gradient-to-br from-amber-50 to-white rounded-[2.5rem] overflow-hidden relative">
+            <div className="phone-mockup">
+              <div className="phone-container">
+                <div className="phone-frame">
+                  <div className="phone-screen">
                     <div className="flex flex-col items-center justify-center h-full p-8 text-center">
                       <div className="mb-8">
                         <h3 className="text-2xl font-semibold text-gray-800 mb-4">
@@ -148,24 +144,24 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <div className="text-5xl mb-6 text-center">📱</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Endless Scrolling</h3>
-              <p className="text-gray-600 text-center leading-relaxed">
+            <div className="problem-card text-center">
+              <div className="text-5xl mb-6">📱</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Endless Scrolling</h3>
+              <p className="text-gray-600 leading-relaxed">
                 Hours disappear into infinite feeds while real relationships fade into the background.
               </p>
             </div>
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <div className="text-5xl mb-6 text-center">😔</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Relationship Neglect</h3>
-              <p className="text-gray-600 text-center leading-relaxed">
+            <div className="problem-card text-center">
+              <div className="text-5xl mb-6">😔</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Relationship Neglect</h3>
+              <p className="text-gray-600 leading-relaxed">
                 When did you last call your best friend? Or have dinner with family without phones?
               </p>
             </div>
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <div className="text-5xl mb-6 text-center">🔄</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Addiction Cycle</h3>
-              <p className="text-gray-600 text-center leading-relaxed">
+            <div className="problem-card text-center">
+              <div className="text-5xl mb-6">🔄</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Addiction Cycle</h3>
+              <p className="text-gray-600 leading-relaxed">
                 We know social media makes us feel worse, but we can&apos;t seem to stop reaching for it.
               </p>
             </div>
@@ -194,11 +190,11 @@ export default function Home() {
               { icon: "🔔", title: "Proactive Reminders", desc: "Gentle notifications to reach out before relationships drift apart." },
               { icon: "📱", title: "One-Tap Actions", desc: "Call, text, or schedule time with loved ones directly from prompts." }
             ].map((feature, index) => (
-              <div key={index} className="group bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 to-yellow-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                <div className="text-5xl mb-6">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
+              <div key={index} className="feature-card">
+                <div className="feature-card-accent" />
+                <div className="feature-icon">{feature.icon}</div>
+                <h3 className="feature-title">{feature.title}</h3>
+                <p className="feature-desc">{feature.desc}</p>
               </div>
             ))}
           </div>
