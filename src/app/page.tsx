@@ -3,6 +3,13 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
+// Extend Window interface for gtag
+declare global {
+  interface Window {
+    gtag?: (command: string, eventName: string, parameters?: Record<string, unknown>) => void;
+  }
+}
+
 export default function Home() {
   const [email, setEmail] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -41,31 +48,31 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="nav">
-        <div className="nav-container">
-          <div className="nav-brand">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
+          <div className="flex items-center">
             <Image
               src="/parea-logo.png"
               alt="Parea"
-              width={280}
-              height={80}
-              className="nav-logo"
+              width={400}
+              height={120}
+              className="h-24 w-auto object-contain max-w-none"
               priority
             />
           </div>
-          <nav className="nav-links">
-            <a href="#features" className="nav-link">
+          <nav className="hidden md:flex items-center gap-8">
+            <a href="#features" className="text-gray-700 hover:text-amber-600 font-medium transition-colors duration-200">
               Features
             </a>
-            <a href="#privacy" className="nav-link">
+            <a href="#privacy" className="text-gray-700 hover:text-amber-600 font-medium transition-colors duration-200">
               Privacy
             </a>
-            <a href="#waitlist" className="btn-primary">
+            <a href="#waitlist" className="bg-gradient-gold text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-200 hover-scale">
               Get Early Access
             </a>
           </nav>
           <div className="md:hidden">
-            <a href="#waitlist" className="btn-primary text-sm px-4 py-2">
+            <a href="#waitlist" className="bg-gradient-gold text-white px-4 py-2 rounded-lg font-medium text-sm hover-scale">
               Get Access
             </a>
           </div>
@@ -73,22 +80,24 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="hero">
+      <section className="bg-gradient-gold-light pt-40 pb-20 px-6 relative overflow-hidden">
         {/* Background Pattern */}
-        <div className="hero-pattern" />
+        <div className="absolute inset-0 opacity-5" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }} />
 
-        <div className="hero-content">
-          <div className="hero-grid">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Hero Text */}
-            <div className="hero-text">
-              <h1 className="hero-title">
+            <div className="text-center lg:text-left animate-slide-up">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-gradient-gold font-serif">
                 Transform Social Media into Real Connections
               </h1>
-              <p className="hero-subtitle">
+              <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
                 Break free from endless scrolling. Every time you reach for social media, Parea gently guides you toward meaningful relationships instead.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 items-center lg:items-start mb-6">
-                <a href="#waitlist" className="btn-primary text-lg px-8 py-4">
+                <a href="#waitlist" className="bg-gradient-gold text-white px-8 py-4 rounded-2xl text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-200 hover-scale">
                   Join the Waitlist
                 </a>
               </div>
@@ -98,10 +107,10 @@ export default function Home() {
             </div>
 
             {/* Phone Mockup */}
-            <div className="phone-mockup">
-              <div className="phone-container">
-                <div className="phone-frame">
-                  <div className="phone-screen">
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative">
+                <div className="w-80 h-[640px] bg-gray-900 rounded-[3rem] p-3 shadow-2xl phone-rotate">
+                  <div className="w-full h-full bg-gradient-to-br from-amber-50 to-white rounded-[2.5rem] overflow-hidden relative">
                     <div className="flex flex-col items-center justify-center h-full p-8 text-center">
                       <div className="mb-8">
                         <h3 className="text-2xl font-semibold text-gray-800 mb-4">
@@ -144,21 +153,21 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="problem-card text-center">
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover-lift text-center">
               <div className="text-5xl mb-6">📱</div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Endless Scrolling</h3>
               <p className="text-gray-600 leading-relaxed">
                 Hours disappear into infinite feeds while real relationships fade into the background.
               </p>
             </div>
-            <div className="problem-card text-center">
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover-lift text-center">
               <div className="text-5xl mb-6">😔</div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Relationship Neglect</h3>
               <p className="text-gray-600 leading-relaxed">
                 When did you last call your best friend? Or have dinner with family without phones?
               </p>
             </div>
-            <div className="problem-card text-center">
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover-lift text-center">
               <div className="text-5xl mb-6">🔄</div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Addiction Cycle</h3>
               <p className="text-gray-600 leading-relaxed">
@@ -190,11 +199,10 @@ export default function Home() {
               { icon: "🔔", title: "Proactive Reminders", desc: "Gentle notifications to reach out before relationships drift apart." },
               { icon: "📱", title: "One-Tap Actions", desc: "Call, text, or schedule time with loved ones directly from prompts." }
             ].map((feature, index) => (
-              <div key={index} className="feature-card">
-                <div className="feature-card-accent" />
-                <div className="feature-icon">{feature.icon}</div>
-                <h3 className="feature-title">{feature.title}</h3>
-                <p className="feature-desc">{feature.desc}</p>
+              <div key={index} className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover-lift feature-accent">
+                <div className="text-5xl mb-6">{feature.icon}</div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
               </div>
             ))}
           </div>
